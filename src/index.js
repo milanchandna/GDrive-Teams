@@ -64,7 +64,6 @@ class GApi extends React.Component {
         if (this.state.isSignedIn) {
             document.getElementById('signinbutton').style.display = 'none';
             document.getElementById('signoutbutton').style.display = 'block';
-            alert('signedin');
             this.fetchFiles();
         } else {
             document.getElementById('signinbutton').style.display = 'block';
@@ -73,7 +72,6 @@ class GApi extends React.Component {
     }
 
     fetchFiles() {
-        alert('started fetching files');
         this.state.api.client.drive.files.list({
             'pageSize': 100,
             'fields': "nextPageToken, files(id, name, webViewLink, parents, webContentLink)"
@@ -121,11 +119,14 @@ class GApi extends React.Component {
                 {
                     this.state.files.map(
                         (file) =>
+                        <a href={file.webContentLink}>
                         <List.Item
-                            content = {file.name}
+                            content = 
+                            {file.name}
                             selectable
                             key={file.id}
                         />
+                        </a>
                     )
                 }
                 </List>
